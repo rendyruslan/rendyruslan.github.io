@@ -1,11 +1,21 @@
 ---
 layout: archive
+entries_layout: grid
+classes: wide
 ---
 
 <h3 class="archive__subtitle">{{ site.data.ui-text[site.locale].recent_posts | default: "Postingan Terbaru" }}</h3>
 
 {% for post in paginator.posts %}
-  {% include archive-single.html %}
+  <div class="grid__wrapper">
+  {% for post in site.posts limit:4 %}
+    {% include archive-single.html type="grid" %}
+  {% endfor %}
+</div>
 {% endfor %}
 
 {% include paginator.html %}
+
+
+
+
