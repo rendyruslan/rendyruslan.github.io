@@ -9,12 +9,14 @@ toc: true
 toc_label: "Getting Started"
 ---
 
-Dalam tutorial ini kita akan membuat Pencarian Sederhana Menggunakan Ajax & MySQLi menggunakan PHP. PHP adalah bahasa skrip sisi server yang dirancang terutama untuk pengembangan web. Dengan menggunakan PHP, Anda dapat membiarkan pengguna Anda langsung berinteraksi dengan skrip dan dengan mudah mempelajari sintaksnya. Ajax adalah script sisi klien yang berkomunikasi ke dan dari server / database tanpa perlu postback atau penyegaran halaman lengkap. Ini sebagian besar digunakan oleh seorang pengkode baru untuk lingkungan yang ramah penggunanya. Jadi, mari kita lakukan pengkodean.
+Dalam tutorial ini kita akan membuat Pencarian Sederhana Menggunakan Ajax & MySQLi menggunakan PHP.
+
+PHP adalah bahasa skrip sisi server yang dirancang terutama untuk pengembangan web. Dengan menggunakan PHP, Anda dapat membiarkan pengguna Anda langsung berinteraksi dengan skrip dan dengan mudah mempelajari sintaksnya. Ajax adalah script sisi klien yang berkomunikasi ke dan dari server / database tanpa perlu postback atau penyegaran halaman lengkap. Ini sebagian besar digunakan oleh seorang pengkode baru untuk lingkungan yang ramah penggunanya. Jadi, mari kita lakukan pengkodean.
 
 ## Sebelum kita mulai:
-Pertama Anda harus mengunduh & menginstal XAMPP atau server lokal apa pun yang menjalankan skrip PHP. Berikut tautan untuk server XAMPP [https://www.apachefriends.org/index.html] (https://www.apachefriends.org/index.html).
+Pertama Anda harus mengunduh & menginstal XAMPP atau server lokal apa pun yang menjalankan skrip PHP. Berikut tautan untuk server XAMPP [`https://www.apachefriends.org/index.html`](https://www.apachefriends.org/index.html).
 
-Dan ini [https://jquery.com/] (https://jquery.com/) adalah tautan untuk jquery yang saya gunakan dalam tutorial ini .
+Dan ini [`https://jquery.com/`](https://jquery.com/) adalah tautan untuk jquery yang saya gunakan dalam tutorial ini .
 
 Terakhir, ini adalah tautan untuk bootstrap yang saya gunakan untuk desain layout [https://getbootstrap.com/] (https://getbootstrap.com/).
 
@@ -24,7 +26,7 @@ Buka database web server Anda kemudian buat nama database di dalamnya 'db_search
 ## Menciptakan koneksi database
 Buka segala jenis editor teks Anda (notepad ++, dll.). Kemudian cukup salin / tempelkan kode di bawah lalu beri nama 'conn.php'.
 
-{% highlight ruby %}
+{% highlight javascript linenos %}
 <?php
 	$conn = new mysqli('localhost', 'root', '', 'db_search');
  
@@ -34,7 +36,7 @@ Buka segala jenis editor teks Anda (notepad ++, dll.). Kemudian cukup salin / te
 ?>
 {% endhighlight %}
 
-[`minimal-mistakes-jekyll`](https://rubygems.org/gems/minimal-mistakes-jekyll) can only be used with Jekyll proper. If you're hosting on GitHub Pages or using that gem the theme won't work. 3rd party themes haven't been white-listed so it's a no go for now.
+[`https://jquery.com/`](https://jquery.com/) can only be used with Jekyll proper. If you're hosting on GitHub Pages or using that gem the theme won't work. 3rd party themes haven't been white-listed so it's a no go for now.
 
 Fine with all that? Great. Let's continue.
 
