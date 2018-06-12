@@ -23,6 +23,10 @@ Terakhir, ini adalah tautan untuk bootstrap yang saya gunakan untuk desain layou
 ## Membuat Database
 Buka database web server Anda kemudian buat nama database di dalamnya 'db_search', setelah itu klik Import kemudian cari file database di dalam folder aplikasi kemudian klik ok.
 
+<figure class="align-center">
+  <img src="{{ site.url }}{{ site.baseurl }}/assets/images/image-alignment-580x300.jpg" alt="">
+</figure> 
+
 ## Menciptakan koneksi database
 Buka segala jenis editor teks Anda (notepad ++, dll.). Kemudian cukup salin / tempelkan kode di bawah lalu beri nama 'conn.php'.
 
