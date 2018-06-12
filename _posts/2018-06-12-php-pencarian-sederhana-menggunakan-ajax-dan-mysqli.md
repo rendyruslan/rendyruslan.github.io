@@ -18,7 +18,7 @@ Pertama Anda harus mengunduh & menginstal XAMPP atau server lokal apa pun yang m
 
 Dan ini [`https://jquery.com/`](https://jquery.com/) adalah tautan untuk jquery yang saya gunakan dalam tutorial ini .
 
-Terakhir, ini adalah tautan untuk bootstrap yang saya gunakan untuk desain layout [https://getbootstrap.com/] (https://getbootstrap.com/).
+Terakhir, ini adalah tautan untuk bootstrap yang saya gunakan untuk desain layout ['https://getbootstrap.com/'] (https://getbootstrap.com/).
 
 ## Membuat Database
 Buka database web server Anda kemudian buat nama database di dalamnya 'db_search', setelah itu klik Import kemudian cari file database di dalam folder aplikasi kemudian klik ok.
@@ -40,69 +40,212 @@ Buka segala jenis editor teks Anda (notepad ++, dll.). Kemudian cukup salin / te
 ?>
 {% endhighlight %}
 
-[`https://jquery.com/`](https://jquery.com/) can only be used with Jekyll proper. If you're hosting on GitHub Pages or using that gem the theme won't work. 3rd party themes haven't been white-listed so it's a no go for now.
+## Menciptakan Tampilan Antarmuka
+Di sinilah kita akan menciptakan penampilan aplikasi. Untuk membuat ini cukup salin dan tulis blok kode ini di dalam editor teks, lalu simpan sebagai 'index.php'.
 
-Fine with all that? Great. Let's continue.
+{% highlight javascript linenos %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+	</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="<a href="https://sourcecodester.com">Sourcecodester</a>
+" rel="nofollow">https://sourcecodester.com">Sourcecodester</a>
+</a>		</div>
+	</nav>
+	<div class="col-md-3"></div>
+	<div class="col-md-6 well">
+		<h3 class="text-primary">PHP - Simple Search Using Ajax/MySQLi</h3>
+		<hr style="border-top:1px dotted #ccc;"/>
+		<form method="POST">
+			<div class="form-inline">
+				<input type="text" id="search_data" class="form-control" placeholder="Search here..."/>
+				<button type="button" id="search" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
+				<button type="button" id="refresh" class="btn btn-success"><span class="glyphicon glyphicon-refresh"></span></button>
+			</div>
+		</form>
+		<br /><br />
+		<table class="table table-bordered">
+			<thead class="alert-success">
+				<tr>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Address</th>
+					<th>Gender</th>
+					<th>Age</th>
+				</tr>
+			</thead>
+			<tbody class="alert-warning" id="data"></tbody>
+		</table>
+	</div>
+</body>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		DisplayData();
+ 
+		$('#search').on('click', function(){
+			if($('#search_data').val() == ""){
+				alert("Please enter something first!");
+			}else{
+				var search = $('#search_data').val();
+				var loader = $('<tr ><td colspan = "5"><center>Searching....</center></td></tr>');
+				$('#data').empty();
+				loader.appendTo('#data');
+ 
+				setTimeout(function(){
+					loader.remove();
+					$.ajax({
+						url: 'search.php',
+						type: 'POST',
+						data: {
+							search: search
+						},
+						success: function(data){
+							$('#data').html(data);
+						}
+					});
+ 
+				}, 3000);	
+			}
+		});
+ 
+		$('#refresh').on('click', function(){
+			DisplayData();
+		});
+ 
+ 
+		function DisplayData(){
+			$.ajax({
+				url: 'data.php',
+				type: 'POST',
+				data: {
+					res: 1
+				},
+				success: function(data){
+					$('#data').html(data);
+				}
+			});
+		}
+	});
+</script>
+</html>
+{% endhighlight %}
 
-If you're migrating a site already using Minimal Mistakes and haven't customized any of the `_includes`, `_layouts`, `_sass` partials, or `assets` this should be quick and painless.
+## Membuat fungsi PHP
+Kode ini berisi fungsi utama aplikasi. Kode ini akan mengirim permintaan ke server database dengan menggunakan ajax, kemudian mengembalikan string yang telah dicari melalui permintaan php. Untuk melakukan copy itu dan tulis blok kode ini di dalam editor teks Anda, lalu simpan seperti yang ditunjukkan di bawah ini.
 
-## Step 1: Remove Theme Files 
+'data.php'
+{% highlight javascript linenos %}
+<?php
+	require_once 'conn.php';
+ 
+	if(ISSET($_POST['res'])){
+		$query = $conn->query("SELECT * FROM `member` ORDER BY `lastname` ASC");
+		while($fetch = $query->fetch_array()){
+			echo "
+				<tr>
+					<td>".$fetch['firstname']."</td>
+					<td>".$fetch['lastname']."</td>
+					<td>".$fetch['address']."</td>
+					<td>".$fetch['gender']."</td>
+					<td>".$fetch['age']."</td>
+				</tr>
+			";
+		}
+	}
+?>
+{% endhighlight %}
 
-Remove `_includes`, `_layouts`, `_sass`, `assets` folders and files within. You won't need these anymore as they're bundled in the theme.
+'search.php'
+{% highlight javascript linenos %}
+<?php
+	require_once 'conn.php';
+ 
+	if(ISSET($_POST['search'])){
+		$search = $_POST['search'];
+		$query = $conn->query("SELECT * FROM `member` WHERE (`lastname` LIKE '%".$search."%') OR (`address` LIKE '%".$search."%') ORDER BY `lastname` ASC");
+		$rows = $query->num_rows;
+ 
+		if($rows > 0){
+			while($fetch = $query->fetch_array()){
+				echo "
+					<tr>
+						<td>".$fetch['firstname']."</td>
+						<td>".$fetch['lastname']."</td>
+						<td>".$fetch['address']."</td>
+						<td>".$fetch['gender']."</td>
+						<td>".$fetch['age']."</td>
+					</tr>
+				";
+			}
+		}else{
+			echo "
+				<tr>
+					<td colspan='5'><center>No Search Found!</center></td>
+				</tr>
+			";
+		}
+	}
+?> 
+{% endhighlight %}
 
-If you customized any of these then leave them alone and only remove the untouched ones. If setup correctly your modified versions should act as [overrides](http://jekyllrb.com/docs/themes/#overriding-theme-defaults) to the versions bundled with the theme.
+## Membuat fungsi Ajax
+Di sinilah kode yang menggunakan skrip ajax. Kode ini berisi beberapa fungsi yang perlu mengirim permintaan ke server php. Untuk melakukannya, cukup salin dan tulis blok kode ini di dalam editor teks, lalu simpan sebagai 'script.js' di dalam folder js.
 
-## Step 2: Update `Gemfile`
+{% highlight javascript linenos %}
+$(document).ready(function(){
+	DisplayData();
+ 
+	$('#search').on('click', function(){
+		if($('#search_data').val() == ""){
+			alert("Please enter something first!");
+		}else{
+			var search = $('#search_data').val();
+			var loader = $('<tr ><td colspan = "5"><center>Searching....</center></td></tr>');
+			$('#data').empty();
+			loader.appendTo('#data');
+ 
+			setTimeout(function(){
+				loader.remove();
+				$.ajax({
+					url: 'search.php',
+					type: 'POST',
+					data: {
+						search: search
+					},
+					success: function(data){
+						$('#data').html(data);
+					}
+				});
+ 
+			}, 3000);	
+		}
+	});
+ 
+	$('#refresh').on('click', function(){
+		DisplayData();
+	});
+ 
+ 
+	function DisplayData(){
+		$.ajax({
+			url: 'data.php',
+			type: 'POST',
+			data: {
+				res: 1
+			},
+			success: function(data){
+				$('#data').html(data);
+			}
+		});
+	}
+});
+{% endhighlight %}
 
-Replace `gem "github-pages` or `gem "jekyll"` with `gem "jekyll", "~> 3.3.0"`. You'll need the latest version of Jekyll[^update-jekyll] for Minimal Mistakes to work and load all of the /assets/ properly.
+Sekarang anda berhasil membuat Pencarian Sederhana Menggunakan Ajax & MySQLi menggunakan PHP. Saya harap tutorial sederhana ini membantu Anda untuk apa yang Anda cari. Untuk lebih banyak pembaruan dan tutorial, silakan kunjungi situs ini. Happy Coding !!!
 
-[^update-jekyll]: You could also run `bundle update jekyll` to update Jekyll.
-
-Add the Minimal Mistakes theme gem: 
-
-```ruby
-gem "minimal-mistakes-jekyll"
-```
-
-When finished your `Gemfile` should look something like this:
-
-```ruby
-source "https://rubygems.org"
-
-gem "jekyll", "~> 3.3.0"
-gem "minimal-mistakes-jekyll"
-```
-
-## Step 3: Run Bundler
-
-Run `bundle install` (or `bundle update` if you're updating an existing repo) to install/update Jekyll and the theme.
-
-## Step 4: Install the Theme
-
-Add `theme: "minimal-mistakes-jekyll"` to your `_config.yml` file.
-
-If you're migrating from an existing Minimal Mistakes site you shouldn't have to change anything else after this. If it's a new site consult then docs to [properly config]({{ "/docs/configuration/" | relative_url }}).
-
-**Please Note:** Paths for image headers, overlays, teasers, [galleries]({{ "/docs/helpers/#gallery" | relative_url }}), and [feature rows]({{ "/docs/helpers/#feature-row" | relative_url }}) have changed and now require a full path. Instead of just `image: filename.jpg` you'll need to use the full path eg: `image: assets/images/filename.jpg`. The preferred location is now `assets/images` but can be placed elsewhere or external hosted. This all applies for image references in `_config.yml` and `author.yml` as well.
-{: .notice--danger}
-
-## Step 5: `jekyll new` Tweaks
-
-If this is a new site be sure to add the following files to `_data/` and customize as you see fit. There is currently no way of bundling them in with the theme, so be sure to consult the docs on how to properly use both.
-
-- [`_data/ui-text.yml`](https://github.com/mmistakes/minimal-mistakes/blob/master/_data/ui-text.yml) - UI text [documentation]({{ "/docs/ui-text/" | relative_url }})
-- [`_data/navigation.yml`](https://github.com/mmistakes/minimal-mistakes/blob/master/_data/navigation.yml) - navigation [documentation]({{ "/docs/navigation/" | relative_url }})
-
-You'll also need to: 
-
-- Replace `<site root>/index.html` with a modified [Minimal Mistakes `index.html`](https://github.com/mmistakes/minimal-mistakes/blob/master/index.html).
-- Change `layout: post` in `_posts/0000-00-00-welcome-to-jekyll.markdown` to `layout: single`.
-- Remove `about.md`, or at the very least change `layout: page` to `layout: single` and remove references to `icon-github.html` (or [copy to your `_includes`](https://github.com/jekyll/minima/tree/master/_includes) if using).
-
----
-
-That's it! If all goes well running `bundle exec jekyll serve` should spin-up your site. If you encounter any bumps please file an issue on GitHub and make sure to indicate you're testing the pre-release Ruby gem version.
-
-[File an issue](https://github.com/mmistakes/minimal-mistakes/issues/new){: .btn .btn--info .btn--large}
-
-Thanks!
