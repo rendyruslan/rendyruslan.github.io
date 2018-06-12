@@ -1,10 +1,17 @@
 ---
 title:  "PHP - Pencarian Sederhana Menggunakan Ajax dan MySQLi"
-last_modified_at: 2018-05-20T16:01:04-04:00
+excerpt: "PHP - Pencarian Sederhana Menggunakan Ajax dan MySQLi - Rendy Ruslan."
+last_modified_at: 2018-06-20T16:01:04-04:00
+header:
+  teaser: "assets/pict/php-simple-search-using-ajax-mysqli_creating-database.png"
 categories: 
-  - Jekyll
+  - Ajax
+  - MySQLi
+  - PHP
 tags:
-  - update
+  - Ajax
+  - MySQLi
+  - PHP
 toc: true
 toc_label: "Getting Started"
 ---
