@@ -24,7 +24,7 @@ Terakhir, ini adalah tautan untuk bootstrap yang saya gunakan untuk desain layou
 Buka database web server Anda kemudian buat nama database di dalamnya 'db_search', setelah itu klik Import kemudian cari file database di dalam folder aplikasi kemudian klik ok.
 
 <figure class="align-center">
-  <img src="{{ site.url }}{{ site.baseurl }}/assets/images/image-alignment-580x300.jpg" alt="">
+  <img src="{{ site.url }}{{ site.baseurl }}/assets/pict/php-simple-search-using-ajax-mysqli_creating-database.png" alt="Membuat Database">
 </figure> 
 
 ## Menciptakan koneksi database
