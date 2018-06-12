@@ -21,14 +21,14 @@ Dan ini [`https://jquery.com/`](https://jquery.com/) adalah tautan untuk jquery 
 Terakhir, ini adalah tautan untuk bootstrap yang saya gunakan untuk desain layout ['https://getbootstrap.com/'] (https://getbootstrap.com/).
 
 ## Membuat Database
-Buka database web server Anda kemudian buat nama database di dalamnya 'db_search', setelah itu klik Import kemudian cari file database di dalam folder aplikasi kemudian klik ok.
+Buka database web server Anda kemudian buat nama database di dalamnya `db_search`, setelah itu klik Import kemudian cari file database di dalam folder aplikasi kemudian klik ok.
 
 <figure class="align-center">
   <img src="{{ site.url }}{{ site.baseurl }}/assets/pict/php-simple-search-using-ajax-mysqli_creating-database.png" alt="Membuat Database">
 </figure> 
 
 ## Menciptakan koneksi database
-Buka segala jenis editor teks Anda (notepad ++, dll.). Kemudian cukup salin / tempelkan kode di bawah lalu beri nama 'conn.php'.
+Buka segala jenis editor teks Anda (notepad ++, dll.). Kemudian cukup salin / tempelkan kode di bawah lalu beri nama `conn.php`.
 
 {% highlight javascript linenos %}
 <?php
@@ -41,7 +41,7 @@ Buka segala jenis editor teks Anda (notepad ++, dll.). Kemudian cukup salin / te
 {% endhighlight %}
 
 ## Menciptakan Tampilan Antarmuka
-Di sinilah kita akan menciptakan penampilan aplikasi. Untuk membuat ini cukup salin dan tulis blok kode ini di dalam editor teks, lalu simpan sebagai 'index.php'.
+Di sinilah kita akan menciptakan penampilan aplikasi. Untuk membuat ini cukup salin dan tulis blok kode ini di dalam editor teks, lalu simpan sebagai `index.php`.
 
 {% highlight javascript linenos %}
 <!DOCTYPE html>
@@ -139,7 +139,7 @@ Di sinilah kita akan menciptakan penampilan aplikasi. Untuk membuat ini cukup sa
 ## Membuat fungsi PHP
 Kode ini berisi fungsi utama aplikasi. Kode ini akan mengirim permintaan ke server database dengan menggunakan ajax, kemudian mengembalikan string yang telah dicari melalui permintaan php. Untuk melakukan copy itu dan tulis blok kode ini di dalam editor teks Anda, lalu simpan seperti yang ditunjukkan di bawah ini.
 
-'data.php'
+`data.php`
 {% highlight javascript linenos %}
 <?php
 	require_once 'conn.php';
@@ -161,7 +161,7 @@ Kode ini berisi fungsi utama aplikasi. Kode ini akan mengirim permintaan ke serv
 ?>
 {% endhighlight %}
 
-'search.php'
+`search.php`
 {% highlight javascript linenos %}
 <?php
 	require_once 'conn.php';
@@ -195,7 +195,7 @@ Kode ini berisi fungsi utama aplikasi. Kode ini akan mengirim permintaan ke serv
 {% endhighlight %}
 
 ## Membuat fungsi Ajax
-Di sinilah kode yang menggunakan skrip ajax. Kode ini berisi beberapa fungsi yang perlu mengirim permintaan ke server php. Untuk melakukannya, cukup salin dan tulis blok kode ini di dalam editor teks, lalu simpan sebagai 'script.js' di dalam folder js.
+Di sinilah kode yang menggunakan skrip ajax. Kode ini berisi beberapa fungsi yang perlu mengirim permintaan ke server php. Untuk melakukannya, cukup salin dan tulis blok kode ini di dalam editor teks, lalu simpan sebagai `script.js` di dalam folder js.
 
 {% highlight javascript linenos %}
 $(document).ready(function(){
