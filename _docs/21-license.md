@@ -5,7 +5,7 @@ excerpt: "Cara Install XAMPP di Windows dan Menjalankan Localhost."
 last_modified_at: 2018-01-10T11:22:01-05:00
 header:
   teaser: "assets/pict/cara-install-xampp-di-windows-dan-menjalankan-localhost_website-apache-friends.png"
-  toc: true
+toc: true
 toc_label: "Getting Started"
 ---
 
