@@ -1,6 +1,7 @@
 ---
 title:  "Halaman Login Sederhana Responsif dengan Input Animasi"
 excerpt: "Halaman Login Sederhana Responsif dengan Input Animasi - Rendy Ruslan."
+last_modified_at:
 header:
   teaser: "assets/pict/halaman-login-sederhana-responsif-dengan-input-animasi.png"
 categories: 
